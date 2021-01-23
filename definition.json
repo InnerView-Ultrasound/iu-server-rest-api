@@ -2,7 +2,7 @@
    "swagger": "2.0",
    "info": {
       "description": "This is the API spec for InnerView's AppointmentQuest wrapper. May be updated to use Square for appointments in the future. *(Based on Swagger Editor's default 'Pet Shop' example and subject to heavy change)* For this sample, you can use the api key `special-key` to test the authorization filters.",
-      "version": "1.0",
+      "version": "1.0.0",
       "title": "IU Server API (AppointmentQuest)",
       "termsOfService": "http://swagger.io/terms/",
       "contact": {
@@ -54,6 +54,99 @@
             "summary": "Returns basic information for all clients on the schedule for the current day",
             "description": "Returns basic information for all clients on the schedule for today. Does not currentlty have an option for specifying which ultrasound tech (AQ Personnel) is currently seeing the client. Needs to return only ACTUAL appointments and not cancelled ones.",
             "operationId": "getBasicClientInfoForCurrentDay",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [],
+            "responses": {
+               "200": {
+                  "description": "successful operation",
+                  "schema": {
+                     "type": "object",
+                     "additionalProperties": {
+                        "type": "integer",
+                        "format": "int32"
+                     }
+                  }
+               }
+            },
+            "security": [
+               {
+                  "api_key": []
+               }
+            ]
+         }
+      },
+      "/schedule": {
+         "get": {
+            "tags": [
+               "schedule"
+            ],
+            "summary": "Returns a formatted schedule for the given date",
+            "description": "Returns a formatted schedule for the given date. Passing in a single day is required. Providing an AQ Personnel is optional, but if provided will create a schedule for the individual tech. If not provided, the default will return all clients for the given day.",
+            "operationId": "getSchedule",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [],
+            "responses": {
+               "200": {
+                  "description": "successful operation",
+                  "schema": {
+                     "type": "object",
+                     "additionalProperties": {
+                        "type": "integer",
+                        "format": "int32"
+                     }
+                  }
+               }
+            },
+            "security": [
+               {
+                  "api_key": []
+               }
+            ]
+         }
+      },
+      "/schedule/today": {
+         "get": {
+            "tags": [
+               "schedule"
+            ],
+            "summary": "Returns a formatted schedule for the current day",
+            "description": "Returns a formatted schedule for the current day. Providing an AQ Personnel is optional, but if provided will create a schedule for the individual tech. If not provided, the default will return all clients.",
+            "operationId": "getScheduleForCurrentDay",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [],
+            "responses": {
+               "200": {
+                  "description": "successful operation",
+                  "schema": {
+                     "type": "object",
+                     "additionalProperties": {
+                        "type": "integer",
+                        "format": "int32"
+                     }
+                  }
+               }
+            },
+            "security": [
+               {
+                  "api_key": []
+               }
+            ]
+         }
+      },
+      "/schedule/tomorrow": {
+         "get": {
+            "tags": [
+               "schedule"
+            ],
+            "summary": "Returns a formatted schedule for the following day",
+            "description": "Returns a formatted schedule for the current day. Providing an AQ Personnel is optional, but if provided will create a schedule for the individual tech. If not provided, the default will return all clients.",
+            "operationId": "getScheduleForFollowingDay",
             "produces": [
                "application/json"
             ],
